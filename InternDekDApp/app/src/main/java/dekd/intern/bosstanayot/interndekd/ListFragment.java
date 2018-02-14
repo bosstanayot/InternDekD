@@ -1,5 +1,6 @@
 package dekd.intern.bosstanayot.interndekd;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +10,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 
 /**
@@ -28,7 +33,7 @@ public class ListFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    JSONArray contents = new JSONArray();
     private OnFragmentInteractionListener mListener;
 
     public ListFragment() {
@@ -68,6 +73,23 @@ public class ListFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_list, container, false);
         final FloatingActionButton fab = v.findViewById(R.id.fab);
+        TextView textView = v.findViewById(R.id.textHello);
+        JsonViewModel jsonViewModel = ViewModelProviders.of(getActivity()).get(JsonViewModel.class);
+        try {
+            textView.setText(jsonViewModel.getJsonArray().toString());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        /**try{
+            String contentStr = getArguments().getString("JsonObj");
+            JSONObject content = new JSONObject(contentStr);
+            contents.put(content);
+            textView.setText(contents.toString());
+        }catch (Exception e){
+            e.printStackTrace();
+        }**/
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
