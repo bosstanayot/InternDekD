@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +31,8 @@ public class ListFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -73,22 +76,25 @@ public class ListFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_list, container, false);
         final FloatingActionButton fab = v.findViewById(R.id.fab);
+        recyclerView = v.findViewById(R.id.jsonlist);
         TextView textView = v.findViewById(R.id.textHello);
         JsonViewModel jsonViewModel = ViewModelProviders.of(getActivity()).get(JsonViewModel.class);
         try {
             textView.setText(jsonViewModel.getJsonArray().toString());
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        adapter = new ListAdapter(jsonViewModel.getJsonArray(),getContext());
+        recyclerView.setAdapter(adapter);
         /**try{
-            String contentStr = getArguments().getString("JsonObj");
-            JSONObject content = new JSONObject(contentStr);
-            contents.put(content);
-            textView.setText(contents.toString());
-        }catch (Exception e){
-            e.printStackTrace();
-        }**/
+         String contentStr = getArguments().getString("JsonObj");
+         JSONObject content = new JSONObject(contentStr);
+         contents.put(content);
+         textView.setText(contents.toString());
+         }catch (Exception e){
+         e.printStackTrace();
+         }**/
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

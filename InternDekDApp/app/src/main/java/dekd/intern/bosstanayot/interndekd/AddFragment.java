@@ -90,10 +90,7 @@ public class AddFragment extends Fragment  {
                 ListFragment listFragment= new ListFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 JSONObject test = writeJson(image, title, message);
-                System.out.print(test.toString());
-                Toast toast = Toast.makeText(getActivity(), test.toString(), Toast.LENGTH_SHORT);
-                toast.show();
-               jsonViewModel.setJsonArray(jsonViewModel.getJsonArray().put(test));
+                jsonViewModel.setJsonArray(jsonViewModel.getJsonArray().put(test));
 
                 /**Bundle args = new Bundle();
                 args.putString("JsonObj", String.valueOf(writeJson(imageUrl.getText().toString(), titleInp.getText().toString(), messageInp.getText().toString())));
