@@ -104,7 +104,7 @@ public class ListFragment extends Fragment {
                 AddFragment addFragment = new AddFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragment_contianer, addFragment);
-                transaction.addToBackStack(null);
+                transaction.addToBackStack("TAG_FRAGMENT");
                 transaction.commit();
             }
         });

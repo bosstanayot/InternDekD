@@ -87,17 +87,10 @@ public class AddFragment extends Fragment  {
                 image = imageUrl.getText().toString();
                 title = titleInp.getText().toString();
                 message = messageInp.getText().toString();
-                ListFragment listFragment= new ListFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 JSONObject test = writeJson(image, title, message);
                 jsonViewModel.setJsonArray(jsonViewModel.getJsonArray().put(test));
+                getFragmentManager().popBackStack();
 
-                /**Bundle args = new Bundle();
-                args.putString("JsonObj", String.valueOf(writeJson(imageUrl.getText().toString(), titleInp.getText().toString(), messageInp.getText().toString())));
-                listFragment.setArguments(args);**/
-
-                transaction.replace(R.id.fragment_contianer, listFragment);
-                transaction.commit();
             }
         });
 

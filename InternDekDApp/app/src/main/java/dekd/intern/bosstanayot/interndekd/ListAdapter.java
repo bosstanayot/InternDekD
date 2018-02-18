@@ -1,9 +1,16 @@
 package dekd.intern.bosstanayot.interndekd;
 
+import android.app.Activity;
+import android.app.FragmentManager;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
@@ -37,9 +45,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ListHolder holder, int position) {
+    public void onBindViewHolder(final ListHolder holder, int position) {
             try {
-                JSONObject jsonObject = jsonlist.getJSONObject((getItemCount()-1)-position);
+                final int list_po = (getItemCount()-1)-position;
+                final JSONObject jsonObject = jsonlist.getJSONObject((list_po));
                 final ProgressBar progressBar = holder.progressBar;
                 //ImageView image = holder.img;
                 Glide.with(context)
@@ -61,9 +70,45 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListHolder> {
                         .into(holder.img);
                 holder.titleText.setText(jsonObject.getString("title"));
                 holder.msgText.setText(jsonObject.getString("message"));
+                holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setMessage("Do you want to DELETE?");
+                        builder.setCancelable(true);
+                        builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                jsonlist.remove(list_po);
+                                notifyDataSetChanged();
+                                //notifyItemRemoved(list_po);
+                                //notifyItemRangeChanged(list_po, getItemCount());
+                                //FragmentManager manager = ((Activity) context).getFragmentManager();
+                                //manager.popBackStack();
+                            }
+                        });
+                        builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        });
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
+                        return false;
+                    }
+                });
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            
+            }
+        });
+
     }
 
     @Override
@@ -75,12 +120,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListHolder> {
         ImageView img;
         TextView titleText, msgText;
         ProgressBar progressBar;
+        CardView cardView;
         public ListHolder(View itemView) {
             super(itemView);
             img = itemView.findViewById(R.id.imgItem);
             titleText = itemView.findViewById(R.id.titleText);
             msgText = itemView.findViewById(R.id.msgText);
             progressBar = itemView.findViewById(R.id.progressbar);
+            cardView = itemView.findViewById(R.id.cardView);
         }
     }
     public ListAdapter(JSONArray jsonlist, Context context){
