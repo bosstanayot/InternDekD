@@ -1,6 +1,6 @@
 package dekd.intern.bosstanayot.interndekd;
 
-import android.app.FragmentManager;
+import android.support.v4.app.FragmentManager;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.net.Uri;
@@ -19,7 +19,7 @@ import android.view.MenuItem;
 import org.w3c.dom.ls.LSException;
 
 public class MainActivity extends AppCompatActivity implements AddFragment.OnFragmentInteractionListener, ListFragment.OnFragmentInteractionListener,
-        FragmentManager.OnBackStackChangedListener, android.support.v4.app.FragmentManager.OnBackStackChangedListener {
+        FragmentManager.OnBackStackChangedListener {
     Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

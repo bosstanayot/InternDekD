@@ -1,12 +1,13 @@
 package dekd.intern.bosstanayot.interndekd;
 
 import android.app.Activity;
-import android.app.FragmentManager;
+import android.support.v4.app.Fragment;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
@@ -35,7 +35,8 @@ import javax.sql.DataSource;
  * Created by barjord on 2/17/2018 AD.
  */
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListHolder> {
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListHolder>  {
+    private final ListFragment fragment;
     private Context context;
     JSONArray jsonlist;
     @Override
@@ -73,28 +74,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListHolder> {
                 holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view) {
-                        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                        builder.setMessage("Do you want to DELETE?");
-                        builder.setCancelable(true);
-                        builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                jsonlist.remove(list_po);
-                                notifyDataSetChanged();
-                                //notifyItemRemoved(list_po);
-                                //notifyItemRangeChanged(list_po, getItemCount());
-                                //FragmentManager manager = ((Activity) context).getFragmentManager();
-                                //manager.popBackStack();
-                            }
-                        });
-                        builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.cancel();
-                            }
-                        });
-                        AlertDialog alertDialog = builder.create();
-                        alertDialog.show();
+                        createDialog(list_po);
                         return false;
                     }
                 });
@@ -105,12 +85,16 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListHolder> {
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            
+                ShowListFragment showListFragment = new ShowListFragment();
+                FragmentManager manager = fragment.getFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.fragment_contianer, showListFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
 
     }
-
     @Override
     public int getItemCount() {
         return jsonlist.length();
@@ -130,8 +114,29 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListHolder> {
             cardView = itemView.findViewById(R.id.cardView);
         }
     }
-    public ListAdapter(JSONArray jsonlist, Context context){
+    public ListAdapter(JSONArray jsonlist, Context context, ListFragment fragment){
         this.jsonlist = jsonlist;
         this.context = context;
+        this.fragment = fragment;
+    }
+    public void createDialog(final int list_po){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage("Do you want to DELETE?");
+        builder.setCancelable(true);
+        builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                jsonlist.remove(list_po);
+                notifyDataSetChanged();
+            }
+        });
+        builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }

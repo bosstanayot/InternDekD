@@ -85,7 +85,7 @@ public class ListFragment extends Fragment {
             e.printStackTrace();
         }
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new ListAdapter(jsonViewModel.getJsonArray(),getContext());
+        adapter = new ListAdapter(jsonViewModel.getJsonArray(),getContext(), ListFragment.this);
         recyclerView.setAdapter(adapter);
         /**try{
          String contentStr = getArguments().getString("JsonObj");
@@ -104,7 +104,7 @@ public class ListFragment extends Fragment {
                 AddFragment addFragment = new AddFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragment_contianer, addFragment);
-                transaction.addToBackStack("TAG_FRAGMENT");
+                transaction.addToBackStack(null);
                 transaction.commit();
             }
         });

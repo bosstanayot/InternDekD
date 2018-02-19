@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,5 +9,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/hello_blank_fragment" />
+    <ImageView
+        android:id="@+id/imgInList"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/ic_launcher"/>
+    <TextView
+        android:id="@+id/titleInpost"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/imgInList"
+        android:text="Title"
+        android:textStyle="bold"
+        android:textSize="35dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/titleInpost"
+        android:text="fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        android:textSize="20dp"/>
 
-</FrameLayout>
+</RelativeLayout>
