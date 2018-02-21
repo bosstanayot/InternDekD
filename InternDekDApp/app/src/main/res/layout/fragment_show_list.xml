@@ -3,12 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="dekd.intern.bosstanayot.interndekd.ShowListFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
     <ImageView
         android:id="@+id/imgInList"
         android:layout_width="300dp"
@@ -16,7 +10,7 @@
         android:layout_centerHorizontal="true"
         android:src="@mipmap/ic_launcher"/>
     <TextView
-        android:id="@+id/titleInpost"
+        android:id="@+id/titleInList"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@+id/imgInList"
@@ -24,10 +18,17 @@
         android:textStyle="bold"
         android:textSize="35dp"/>
     <TextView
+        android:id="@+id/messageInList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/titleInpost"
+        android:layout_below="@id/titleInList"
         android:text="fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
         android:textSize="20dp"/>
+
+    <ProgressBar
+        android:id="@+id/progressInlist"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

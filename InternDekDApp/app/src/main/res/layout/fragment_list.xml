@@ -5,12 +5,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="dekd.intern.bosstanayot.interndekd.ListFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/textHello"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/jsonlist"
         android:layout_width="match_parent"
