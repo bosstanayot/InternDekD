@@ -11,7 +11,7 @@ import android.view.Menu;
 public class MainActivity extends AppCompatActivity implements AddFragment.OnFragmentInteractionListener, ListFragment.OnFragmentInteractionListener,
         FragmentManager.OnBackStackChangedListener {
     Toolbar toolbar;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,10 +19,7 @@ public class MainActivity extends AppCompatActivity implements AddFragment.OnFra
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ListFragment listFragment= new ListFragment();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_contianer, listFragment);
-        transaction.commit();
+        showListFrag();
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
         shouldDisplayHomeUp();
@@ -60,5 +57,12 @@ public class MainActivity extends AppCompatActivity implements AddFragment.OnFra
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
 
+    }
+
+    public void showListFrag(){
+        ListFragment listFragment= new ListFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_contianer, listFragment);
+        transaction.commit();
     }
 }

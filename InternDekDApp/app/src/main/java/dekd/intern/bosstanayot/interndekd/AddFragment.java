@@ -17,6 +17,7 @@ import org.json.JSONObject;
 
 public class AddFragment extends Fragment  {
     EditText imageUrl, titleInp, messageInp;
+    Button addBtn;
     String image, title, message;
     AlertDialog.Builder builder;
     private OnFragmentInteractionListener mListener;
@@ -38,7 +39,7 @@ public class AddFragment extends Fragment  {
         imageUrl = v.findViewById(R.id.imageUrl);
         titleInp = v.findViewById(R.id.titleInp);
         messageInp = v.findViewById(R.id.messageInp);
-        Button addBtn = v.findViewById(R.id.addBtn);
+        addBtn = v.findViewById(R.id.addBtn);
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override

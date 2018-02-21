@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 public class ListFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
+    FloatingActionButton fab;
     private OnFragmentInteractionListener mListener;
 
     public ListFragment() {
@@ -36,7 +37,7 @@ public class ListFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_list, container, false);
         JsonViewModel jsonViewModel = ViewModelProviders.of(getActivity()).get(JsonViewModel.class);
 
-        final FloatingActionButton fab = v.findViewById(R.id.fab);
+        fab = v.findViewById(R.id.fab);
         recyclerView = v.findViewById(R.id.jsonlist);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
