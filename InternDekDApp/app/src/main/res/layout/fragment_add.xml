@@ -1,8 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="dekd.intern.bosstanayot.interndekd.AddFragment">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context="dekd.intern.bosstanayot.interndekd.AddDialogFragment">
     <EditText
         android:id="@+id/imageUrl"
         android:layout_width="match_parent"
@@ -29,15 +29,30 @@
         android:hint="Message (600 Character)"
         android:inputType="textMultiLine"
         android:maxLength="600"
-        android:layout_above="@+id/addBtn"
+        android:layout_above="@+id/btnLayout"
 
         />
+    <LinearLayout
+        android:id="@+id/btnLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center">
+
     <Button
         android:id="@+id/addBtn"
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:text="ADD"
         android:layout_alignParentBottom="true"
-
         />
+    <Button
+        android:id="@+id/cancelBtn"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:text="CANCEL"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/addBtn"
+        />
+    </LinearLayout>
 </RelativeLayout>

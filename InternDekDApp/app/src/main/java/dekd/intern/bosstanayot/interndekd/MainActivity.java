@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
-public class MainActivity extends AppCompatActivity implements AddFragment.OnFragmentInteractionListener, ListFragment.OnFragmentInteractionListener,
+public class MainActivity extends AppCompatActivity implements ListFragment.OnFragmentInteractionListener,
         FragmentManager.OnBackStackChangedListener {
     Toolbar toolbar;
 
@@ -18,8 +18,9 @@ public class MainActivity extends AppCompatActivity implements AddFragment.OnFra
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        showListFrag();
+        if (savedInstanceState == null) {
+            showListFrag();
+        }
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
         shouldDisplayHomeUp();
@@ -60,9 +61,14 @@ public class MainActivity extends AppCompatActivity implements AddFragment.OnFra
     }
 
     public void showListFrag(){
-        ListFragment listFragment= new ListFragment();
+        /**ListFragment listFragment= new ListFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_contianer, listFragment);
-        transaction.commit();
+        transaction.commit();**/
+        String tag = ListFragment.class.getSimpleName();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_contianer, ListFragment.newInstance(), tag)
+                //.addToBackStack(tag)
+                .commit();
     }
 }
