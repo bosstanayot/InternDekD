@@ -1,0 +1,58 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context="dekd.intern.bosstanayot.interndekd.AddDialogFragment">
+    <EditText
+        android:id="@+id/imageUrl"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:hint="Image URL"
+        android:gravity="top"/>
+
+    <EditText
+        android:id="@+id/titleInp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="60dp"
+        android:hint="Title (30 Character)"
+        android:maxLength="30"
+        android:gravity="top"/>
+
+    <EditText
+        android:id="@+id/messageInp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="top"
+        android:layout_marginTop="110dp"
+        android:hint="Message (600 Character)"
+        android:inputType="textMultiLine"
+        android:maxLength="600"
+        android:layout_above="@+id/btnLayout"
+
+        />
+    <LinearLayout
+        android:id="@+id/btnLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center">
+
+    <Button
+        android:id="@+id/addBtn"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:text="ADD"
+        android:layout_alignParentBottom="true"
+        />
+    <Button
+        android:id="@+id/cancelBtn"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:text="CANCEL"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/addBtn"
+        />
+    </LinearLayout>
+</RelativeLayout>

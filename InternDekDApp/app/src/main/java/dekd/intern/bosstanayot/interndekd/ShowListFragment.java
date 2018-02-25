@@ -21,30 +21,40 @@ public class ShowListFragment extends Fragment {
     ProgressBar progressBar;
     TextView titleInList, messageInList;
 
-    public ShowListFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_show_list, container, false);
+
+        bindView(v);
+        getBundle();
+        setView();
+
+        return v;
+
+    }
+
+    public void bindView(View v){
         imgInList = v.findViewById(R.id.imgInList);
         progressBar = v.findViewById(R.id.progressInlist);
         titleInList = v.findViewById(R.id.titleInList);
         messageInList = v.findViewById(R.id.messageInList);
+    }
+
+    public void setView(){
+        setImgFromUrl();
+        titleInList.setText(title);
+        messageInList.setText(message);
+    }
+
+    public void getBundle(){
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             imgUrl = bundle.getString("imgUrl");
             title = bundle.getString("title");
             message = bundle.getString("message");
         }
-        setImgFromUrl();
-        titleInList.setText(title);
-        messageInList.setText(message);
-        return v;
-
     }
 
     public void setImgFromUrl(){

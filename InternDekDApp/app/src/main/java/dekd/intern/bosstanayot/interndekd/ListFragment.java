@@ -1,8 +1,6 @@
 package dekd.intern.bosstanayot.interndekd;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -12,17 +10,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class ListFragment extends DialogFragment implements AddDialogFragment.OnDialogListener {
+public class ListFragment extends DialogFragment implements AddDialogFragment.OnDialogListener{
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     FloatingActionButton fab;
-    private OnFragmentInteractionListener mListener;
+    MessageAlert messageAlert;
 
     public static ListFragment newInstance() {
         return new ListFragment();
@@ -31,6 +27,7 @@ public class ListFragment extends DialogFragment implements AddDialogFragment.On
     public ListFragment(){
 
     }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,10 +37,8 @@ public class ListFragment extends DialogFragment implements AddDialogFragment.On
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        fab = view.findViewById(R.id.fab);
-        recyclerView = view.findViewById(R.id.jsonlist);
+        bindView(view);
         callLists();
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,49 +46,37 @@ public class ListFragment extends DialogFragment implements AddDialogFragment.On
             }
         });
     }
-
+    public void bindView(View v){
+        fab = v.findViewById(R.id.fab);
+        recyclerView = v.findViewById(R.id.jsonlist);
+        messageAlert = new MessageAlert(getContext());
+    }
     public void showDialogAdd(){
-        /**AddDialogFragment addFragment = new AddDialogFragment();
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_contianer, addFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();**/
-
-        AddDialogFragment fragment = new AddDialogFragment.Builder()
-                .setImgHint("Image URL")
-                .setTitleHint("Title (30 Character)")
-                .setMessageHint("Message (600 Character)")
-                .setPositiveText("ADD")
-                .setNegativeText("CANCEL")
+        AddDialogFragment addDialogFragment = new AddDialogFragment.Builder()
+                .setImgHint(R.string.img_hint)
+                .setTitleHint(R.string.title_hint)
+                .setMessageHint(R.string.message_hint)
+                .setPositiveText(R.string.add)
+                .setNegativeText(R.string.cancel)
                 .build();
-        fragment.show(getChildFragmentManager(), null);
+        addDialogFragment.show(getChildFragmentManager(), null);
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    @Override
+   @Override
     public void onPositiveButtonClick(String imgUrl, String title, String message) {
         JsonViewModel jsonViewModel = ViewModelProviders.of(getActivity()).get(JsonViewModel.class);
-        JSONObject jsonList = writeJson(imgUrl, title, message);
-        jsonViewModel.setJsonArray(jsonViewModel.getJsonArray().put(jsonList));
-        //getFragmentManager().popBackStack();
-        callLists();
+        if(imgUrl.equals("") || title.equals("") || message.equals("")){
+            messageAlert.setMessageAlert(getContext(), "Please complete the form.");
+        }else {
+            JSONObject jsonList = writeJson(imgUrl, title, message);
+            jsonViewModel.setJsonArray(jsonViewModel.getJsonArray().put(jsonList));
+            adapter.notifyDataSetChanged();
+        }
     }
+    @Override
+    public void onNegativeButtonClick() {
+    }
+
     public void callLists(){
         JsonViewModel jsonViewModel = ViewModelProviders.of(getActivity()).get(JsonViewModel.class);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -112,13 +95,4 @@ public class ListFragment extends DialogFragment implements AddDialogFragment.On
         return content;
     }
 
-    @Override
-    public void onNegativeButtonClick() {
-        Toast.makeText(getContext(),"test", Toast.LENGTH_SHORT).show();
-    }
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }

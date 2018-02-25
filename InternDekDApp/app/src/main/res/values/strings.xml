@@ -2,7 +2,12 @@
     <string name="app_name">InternDekD</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_add_list">AddListActivity</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="add">SAVE</string>
+    <string name="img_hint">Image URL</string>
+    <string name="title_hint">Title (30 Character)</string>
+    <string name="message_hint">Message (600 Character)</string>
+    <string name="message_del">Do you want to DELETE?</string>
+    <string name="cancel">Cancel</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="delete">DELETE</string>
 </resources>

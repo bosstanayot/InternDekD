@@ -1,8 +1,5 @@
 package dekd.intern.bosstanayot.interndekd;
 
-/**
- * Created by barjord on 2/15/2018 AD.
- */
 import android.arch.lifecycle.ViewModel;
 
 import org.json.JSONArray;

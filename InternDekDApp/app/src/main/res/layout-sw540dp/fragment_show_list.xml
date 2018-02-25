@@ -16,19 +16,19 @@
     <TextView
         android:id="@+id/titleInList"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="80dp"
         android:layout_below="@+id/imgInList"
-        android:layout_marginTop="20dp"
         android:text="Title"
+        android:layout_marginTop="20dp"
         android:textStyle="bold"
-        android:textSize="35dp"/>
+        android:textSize="55dp"/>
     <TextView
         android:id="@+id/messageInList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/titleInList"
         android:text="fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
-        android:textSize="20dp"/>
+        android:textSize="35dp"/>
 
     <ProgressBar
         android:id="@+id/progressInlist"

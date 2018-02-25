@@ -6,14 +6,13 @@ import android.content.DialogInterface;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
@@ -24,16 +23,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-/**
- * Created by barjord on 2/17/2018 AD.
- */
-
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListHolder>  {
+public class ListAdapter extends RecyclerView.Adapter<ListHolder>{
     private final ListFragment fragment;
     private Context context;
+
     AlertDialog.Builder builder;
     ImageView img;
-    String imgUrl, title, message;
     JSONArray jsonlist;
     ProgressBar progressBar;
 
@@ -45,31 +40,38 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListHolder>  {
 
     @Override
     public void onBindViewHolder(final ListHolder holder, int position) {
+
             try {
-                final int list_po = (getItemCount()-1)-position;
-                final JSONObject jsonObject = jsonlist.getJSONObject((list_po));
+                final int listPo = (getItemCount()-1)-position;
+                final JSONObject jsonObject = jsonlist.getJSONObject((listPo));
+                final String imgUrl, title, message;
+
                 progressBar = holder.progressBar;
                 img = holder.img;
+
                 imgUrl = jsonObject.getString("imgUrl");
                 title = jsonObject.getString("title");
                 message = jsonObject.getString("message");
-                //ImageView image = holder.img;
+
+                setImgUrl(imgUrl, progressBar, img);
                 holder.titleText.setText(title);
                 holder.msgText.setText(message);
+
                 holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view) {
-                        createDialog(list_po);
+                        createDialog(listPo);
                         return false;
                     }
                 });
-                setImgUrl();
+
                 holder.cardView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        changeToShowFrag();
+                        changeToShowFrag(imgUrl, title, message);
                     }
                 });
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -80,20 +82,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListHolder>  {
         return jsonlist.length();
     }
 
-    public class ListHolder extends RecyclerView.ViewHolder{
-        ImageView img;
-        TextView titleText, msgText;
-        ProgressBar progressBar;
-        CardView cardView;
-        public ListHolder(View itemView) {
-            super(itemView);
-            img = itemView.findViewById(R.id.imgItem);
-            titleText = itemView.findViewById(R.id.titleText);
-            msgText = itemView.findViewById(R.id.msgText);
-            progressBar = itemView.findViewById(R.id.progressbar);
-            cardView = itemView.findViewById(R.id.cardView);
-        }
-    }
+
 
     public ListAdapter(JSONArray jsonlist, Context context, ListFragment fragment){
         this.jsonlist = jsonlist;
@@ -101,14 +90,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListHolder>  {
         this.fragment = fragment;
     }
 
-    public void createDialog(final int list_po){
+    public void createDialog(final int listPo){
         builder = new AlertDialog.Builder(context);
         builder.setMessage("Do you want to DELETE?");
         builder.setCancelable(true);
         builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                jsonlist.remove(list_po);
+                jsonlist.remove(listPo);
                 notifyDataSetChanged();
             }
         });
@@ -122,7 +111,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListHolder>  {
         alertDialog.show();
     }
 
-    public void sentToShow(ShowListFragment showListFragment){
+    public void sentToShow(ShowListFragment showListFragment, String imgUrl, String title, String message){
         Bundle bundle = new Bundle();
         bundle.putString("imgUrl", imgUrl);
         bundle.putString("title", title);
@@ -130,19 +119,19 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListHolder>  {
         showListFragment.setArguments(bundle);
     }
 
-    public void setImgUrl(){
+    public void setImgUrl(String imgUrl, final ProgressBar progressBarholder, ImageView img){
         Glide.with(context)
                 .load(imgUrl)
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                        progressBar.setVisibility(View.GONE);
+                        progressBarholder.setVisibility(View.GONE);
                         return false;
                     }
 
                     @Override
                     public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                        progressBar.setVisibility(View.GONE);
+                        progressBarholder.setVisibility(View.GONE);
                         return false;
                     }
                 })
@@ -150,13 +139,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListHolder>  {
                 .into(img);
     }
 
-    public void changeToShowFrag(){
+    public void changeToShowFrag(String imgUrl, String title, String message ){
         ShowListFragment showListFragment = new ShowListFragment();
         FragmentManager manager = fragment.getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.fragment_contianer, showListFragment);
         transaction.addToBackStack(null);
         transaction.commit();
-        sentToShow(showListFragment);
+        sentToShow(showListFragment, imgUrl, title, message);
     }
+
 }
