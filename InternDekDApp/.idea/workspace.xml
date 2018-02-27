@@ -73,13 +73,13 @@
       <file leaf-file-name="ListAdapter.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/dekd/intern/bosstanayot/interndekd/view/ListAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-726">
-              <caret line="52" column="0" lean-forward="true" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+            <state relative-caret-position="119">
+              <caret line="51" column="33" lean-forward="true" selection-start-line="51" selection-start-column="33" selection-end-line="51" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3104#3124#0" expanded="true" />
-                <element signature="e#3198#3213#0" expanded="true" />
-                <element signature="e#3492#3507#0" expanded="true" />
+                <element signature="e#3161#3181#0" expanded="true" />
+                <element signature="e#3255#3270#0" expanded="true" />
+                <element signature="e#3549#3564#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2512,7 +2512,7 @@
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
       <method>
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1519728267746" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1519728648850" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2559,7 +2559,7 @@
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
       </Profilers>
       <method>
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1519728267746" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1519728648850" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2741,7 +2741,7 @@
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
       <method>
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1519728267759" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1519728648851" />
       </method>
     </configuration>
     <list size="1">
@@ -3320,13 +3320,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/dekd/intern/bosstanayot/interndekd/view/ListAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-726">
-          <caret line="52" column="0" lean-forward="true" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+        <state relative-caret-position="119">
+          <caret line="51" column="33" lean-forward="true" selection-start-line="51" selection-start-column="33" selection-end-line="51" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3104#3124#0" expanded="true" />
-            <element signature="e#3198#3213#0" expanded="true" />
-            <element signature="e#3492#3507#0" expanded="true" />
+            <element signature="e#3161#3181#0" expanded="true" />
+            <element signature="e#3255#3270#0" expanded="true" />
+            <element signature="e#3549#3564#0" expanded="true" />
           </folding>
         </state>
       </provider>

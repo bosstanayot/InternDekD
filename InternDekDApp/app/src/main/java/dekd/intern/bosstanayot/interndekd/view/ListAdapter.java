@@ -50,6 +50,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListHolder>{
 
                 progressBar = holder.progressBar;
                 img = holder.img;
+                progressBar.setVisibility(View.VISIBLE);
 
                 imgUrl = jsonObject.getString("imgUrl");
                 title = jsonObject.getString("title");
@@ -119,19 +120,19 @@ public class ListAdapter extends RecyclerView.Adapter<ListHolder>{
         showListFragment.setArguments(bundle);
     }
 
-    public void setImgUrl(String imgUrl, final ProgressBar progressBarholder, ImageView img){
+    public void setImgUrl(String imgUrl, final ProgressBar progressBarHolder, ImageView img){
         Glide.with(context)
                 .load(imgUrl)
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                        progressBarholder.setVisibility(View.GONE);
+                        progressBarHolder.setVisibility(View.GONE);
                         return false;
                     }
 
                     @Override
                     public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                        progressBarholder.setVisibility(View.GONE);
+                        progressBarHolder.setVisibility(View.GONE);
                         return false;
                     }
                 })
