@@ -1,4 +1,4 @@
-package dekd.intern.bosstanayot.interndekd;
+package dekd.intern.bosstanayot.interndekd.view;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import dekd.intern.bosstanayot.interndekd.R;
 
 public class ListHolder extends RecyclerView.ViewHolder{
     ImageView img;

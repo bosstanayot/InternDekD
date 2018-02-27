@@ -1,4 +1,4 @@
-package dekd.intern.bosstanayot.interndekd;
+package dekd.intern.bosstanayot.interndekd.model;
 
 import android.arch.lifecycle.ViewModel;
 

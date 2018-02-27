@@ -1,4 +1,4 @@
-package dekd.intern.bosstanayot.interndekd;
+package dekd.intern.bosstanayot.interndekd.view;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -13,8 +13,12 @@ import android.view.ViewGroup;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import dekd.intern.bosstanayot.interndekd.R;
+import dekd.intern.bosstanayot.interndekd.model.JsonViewModel;
+import dekd.intern.bosstanayot.interndekd.model.MessageAlert;
 
-public class ListFragment extends DialogFragment implements AddDialogFragment.OnDialogListener{
+
+public class ListFragment extends DialogFragment implements AddDialogFragment.OnDialogListener {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     FloatingActionButton fab;
@@ -22,10 +26,6 @@ public class ListFragment extends DialogFragment implements AddDialogFragment.On
 
     public static ListFragment newInstance() {
         return new ListFragment();
-    }
-
-    public ListFragment(){
-
     }
 
     @Nullable
@@ -46,11 +46,13 @@ public class ListFragment extends DialogFragment implements AddDialogFragment.On
             }
         });
     }
+
     public void bindView(View v){
         fab = v.findViewById(R.id.fab);
         recyclerView = v.findViewById(R.id.jsonlist);
         messageAlert = new MessageAlert(getContext());
     }
+
     public void showDialogAdd(){
         AddDialogFragment addDialogFragment = new AddDialogFragment.Builder()
                 .setImgHint(R.string.img_hint)
@@ -66,13 +68,14 @@ public class ListFragment extends DialogFragment implements AddDialogFragment.On
     public void onPositiveButtonClick(String imgUrl, String title, String message) {
         JsonViewModel jsonViewModel = ViewModelProviders.of(getActivity()).get(JsonViewModel.class);
         if(imgUrl.equals("") || title.equals("") || message.equals("")){
-            messageAlert.setMessageAlert(getContext(), "Please complete the form.");
+            messageAlert.setMessageAlert(getContext(), R.string.form_alert);
         }else {
             JSONObject jsonList = writeJson(imgUrl, title, message);
             jsonViewModel.setJsonArray(jsonViewModel.getJsonArray().put(jsonList));
             adapter.notifyDataSetChanged();
         }
     }
+
     @Override
     public void onNegativeButtonClick() {
     }
@@ -83,6 +86,7 @@ public class ListFragment extends DialogFragment implements AddDialogFragment.On
         adapter = new ListAdapter(jsonViewModel.getJsonArray(),getContext(), ListFragment.this);
         recyclerView.setAdapter(adapter);
     }
+
     public JSONObject writeJson(String imgUrl, String title, String msg){
         JSONObject content = new JSONObject();
         try {

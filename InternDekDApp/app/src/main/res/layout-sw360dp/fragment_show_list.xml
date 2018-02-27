@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="dekd.intern.bosstanayot.interndekd.ShowListFragment">
+    tools:context="dekd.intern.bosstanayot.interndekd.view.ShowListFragment">
     <ImageView
         android:id="@+id/imgInList"
         android:layout_width="300dp"

@@ -1,10 +1,13 @@
-package dekd.intern.bosstanayot.interndekd;
+package dekd.intern.bosstanayot.interndekd.activity;
 
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+
+import dekd.intern.bosstanayot.interndekd.R;
+import dekd.intern.bosstanayot.interndekd.view.ListFragment;
 
 public class MainActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener {
     Toolbar toolbar;
@@ -34,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
     public void onBackStackChanged() {
         shouldDisplayHomeUp();
     }
+
     public void shouldDisplayHomeUp(){
         boolean canback = getSupportFragmentManager().getBackStackEntryCount()>0;
         getSupportActionBar().setDisplayHomeAsUpEnabled(canback);

@@ -1,4 +1,4 @@
-package dekd.intern.bosstanayot.interndekd;
+package dekd.intern.bosstanayot.interndekd.view;
 
 import android.os.Bundle;
 import android.content.Context;
@@ -21,6 +21,8 @@ import com.bumptech.glide.request.target.Target;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import dekd.intern.bosstanayot.interndekd.R;
 
 
 public class ListAdapter extends RecyclerView.Adapter<ListHolder>{
@@ -82,8 +84,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListHolder>{
         return jsonlist.length();
     }
 
-
-
     public ListAdapter(JSONArray jsonlist, Context context, ListFragment fragment){
         this.jsonlist = jsonlist;
         this.context = context;
@@ -92,16 +92,16 @@ public class ListAdapter extends RecyclerView.Adapter<ListHolder>{
 
     public void createDialog(final int listPo){
         builder = new AlertDialog.Builder(context);
-        builder.setMessage("Do you want to DELETE?");
+        builder.setMessage(R.string.message_del);
         builder.setCancelable(true);
-        builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.delete, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 jsonlist.remove(listPo);
                 notifyDataSetChanged();
             }
         });
-        builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.cancel();

@@ -1,4 +1,4 @@
-package dekd.intern.bosstanayot.interndekd;
+package dekd.intern.bosstanayot.interndekd.view;
 
 
 import android.os.Bundle;
@@ -15,6 +15,8 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
+import dekd.intern.bosstanayot.interndekd.R;
+
 public class ShowListFragment extends Fragment {
     String imgUrl, title, message;
     ImageView imgInList;
@@ -24,7 +26,6 @@ public class ShowListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_show_list, container, false);
 
         bindView(v);

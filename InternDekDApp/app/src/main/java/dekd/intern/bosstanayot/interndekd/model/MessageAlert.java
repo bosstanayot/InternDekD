@@ -1,4 +1,4 @@
-package dekd.intern.bosstanayot.interndekd;
+package dekd.intern.bosstanayot.interndekd.model;
 
 import android.content.Context;
 import android.widget.Toast;
@@ -12,7 +12,7 @@ public class MessageAlert {
         toast = new Toast(context);
     }
 
-    public void setMessageAlert(Context context, String message){
+    public void setMessageAlert(Context context, int message){
         toast.cancel();
         toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
         toast.show();

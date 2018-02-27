@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="dekd.intern.bosstanayot.interndekd.ListFragment">
+    tools:context="dekd.intern.bosstanayot.interndekd.view.ListFragment">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/jsonlist"
         android:layout_width="match_parent"
